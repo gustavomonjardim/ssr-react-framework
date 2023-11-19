@@ -6,7 +6,7 @@ import * as ESBuild from "esbuild";
 // as a string, so unfortunately we do have to use fs.readFile here...
 export async function bundleWithESBuild() {
   await ESBuild.build({
-    entryPoints: ["src/client.tsx"],
+    entryPoints: ["src/client/index.tsx"],
     bundle: true,
     treeShaking: true,
     platform: "browser",

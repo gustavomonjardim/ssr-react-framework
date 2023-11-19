@@ -2,9 +2,9 @@
   "name": "ssr-react",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server/index.js",
   "scripts": {
-    "dev": "tsx watch index.tsx"
+    "dev": "tsx watch src/server/index.tsx"
   },
   "keywords": [],
   "author": "",

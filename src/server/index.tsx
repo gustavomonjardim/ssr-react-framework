@@ -1,10 +1,8 @@
 import React from "react";
 import express, { Application, Request, Response } from "express";
 import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
-import { AppRoutes } from "./src/router";
-import { bundleWithESBuild } from "./build";
-import Home from "./src/pages/home";
+import { bundleWithESBuild } from "../../build";
+import Home from "../client/pages/home";
 
 const app: Application = express();
 const port = 3000;
