@@ -3,6 +3,8 @@ import express, { Application, Request, Response } from "express";
 import ReactDOMServer from "react-dom/server";
 import { bundleWithESBuild } from "../../build";
 import Home from "../client/pages/home";
+import { StaticRouter } from "react-router-dom/server";
+import { AppRoutes } from "../client/router";
 
 const app: Application = express();
 const port = 3000;
@@ -28,7 +30,11 @@ app.get("/bundle.js", async (_req: Request, res: Response) => {
 });
 
 app.get("*", async (req: Request, res: Response) => {
-  const html = ReactDOMServer.renderToString(<Home />);
+  const html = ReactDOMServer.renderToString(
+    <StaticRouter location={req.url}>
+      <AppRoutes />
+    </StaticRouter>
+  );
   res.setHeader("Content-Type", "text/html");
   res.send(htmlString(html));
 });

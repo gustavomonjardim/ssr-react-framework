@@ -1,10 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router";
+import Home from "./pages/home";
+import Contact from "./pages/contact";
+import Shop from "./pages/shop";
 
 const routes = [
-  { path: "/", Component: <div>Home</div> },
-  { path: "/another-test", Component: <div>Another test</div> },
-  { path: "/test", Component: <div>Test</div> },
+  { path: "/", Component: <Home /> },
+  { path: "/shop", Component: <Shop /> },
+  { path: "/contact", Component: <Contact /> },
 ];
 
 export function AppRoutes() {
