@@ -1,10 +1,9 @@
 import React from "react";
 import express, { Application, Request, Response } from "express";
 import ReactDOMServer from "react-dom/server";
-import { bundleWithESBuild } from "../../build";
-import Home from "../client/pages/home";
 import { StaticRouter } from "react-router-dom/server";
 import { AppRoutes } from "../client/router";
+import path from "path";
 
 const app: Application = express();
 const port = 3000;
@@ -23,10 +22,13 @@ const htmlString = (data: string) => `<!DOCTYPE html>
 </html>`;
 
 app.get("/bundle.js", async (_req: Request, res: Response) => {
-  const bundle = await bundleWithESBuild();
+  const options = {
+    root: path.join(__dirname, "/public"),
+  };
+
   res.type(".js");
   res.setHeader("Content-Type", "application/javascript");
-  res.send(bundle);
+  res.sendFile("bundle.js", options);
 });
 
 app.get("*", async (req: Request, res: Response) => {
