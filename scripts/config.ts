@@ -6,24 +6,12 @@ export const clientConfig: ESBuild.BuildOptions = {
   treeShaking: true,
   platform: "browser",
   outfile: "./dist/public/bundle.js",
-  loader: {
-    ".tsx": "tsx",
-    ".ts": "tsx",
-    ".jsx": "jsx",
-    ".js": "jsx",
-  },
 };
 
 export const serverConfig: ESBuild.BuildOptions = {
-  entryPoints: ["src/server/index.tsx"],
+  entryPoints: ["src/server/index.ts"],
   bundle: true,
   treeShaking: true,
   platform: "node",
   outfile: "./dist/server.js",
-  loader: {
-    ".tsx": "tsx",
-    ".ts": "tsx",
-    ".jsx": "jsx",
-    ".js": "jsx",
-  },
 };
