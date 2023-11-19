@@ -4,26 +4,35 @@ import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { AppRoutes } from "./src/router";
 import { bundleWithESBuild } from "./build";
+import Home from "./src/pages/home";
 
 const app: Application = express();
 const port = 3000;
 
-app.get("*", async (req: Request, res: Response) => {
-  const html = ReactDOMServer.renderToString(
-    <StaticRouter location={req.url}>
-      <AppRoutes />
-      <script src="/bundle.js" />
-    </StaticRouter>
-  );
-  res.setHeader("Content-Type", "text/html");
-  res.send(html);
-});
+const htmlString = (data: string) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<body>
+<div id="root">${data}</div>
+<script src="/bundle.js"></script>
+</body>
+</html>`;
 
 app.get("/bundle.js", async (_req: Request, res: Response) => {
   const bundle = await bundleWithESBuild();
   res.type(".js");
   res.setHeader("Content-Type", "application/javascript");
   res.send(bundle);
+});
+
+app.get("*", async (req: Request, res: Response) => {
+  const html = ReactDOMServer.renderToString(<Home />);
+  res.setHeader("Content-Type", "text/html");
+  res.send(htmlString(html));
 });
 
 app.listen(port, () => {

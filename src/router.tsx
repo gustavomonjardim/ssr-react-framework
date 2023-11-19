@@ -9,10 +9,13 @@ const routes = [
 
 export function AppRoutes() {
   return (
-    <Routes>
-      {routes.map((page) => (
-        <Route key={page.path} path={page.path} element={page.Component} />
-      ))}
-    </Routes>
+    <>
+      <Routes>
+        {routes.map((page) => (
+          <Route key={page.path} path={page.path} element={page.Component} />
+        ))}
+      </Routes>
+      <script src="/bundle.js" />
+    </>
   );
 }
