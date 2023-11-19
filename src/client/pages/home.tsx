@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [counter, setCounter] = useState(0);
@@ -8,8 +9,8 @@ const Home = () => {
         <p>Counter is: {counter}</p>
         <button onClick={() => setCounter((c) => c + 1)}>Increment</button>
       </div>
-      <a href="/contact">Go to contact page</a>
-      <a href="/shop">Go to shop page</a>
+      <Link to="/contact">Go to contact page</Link>
+      <Link to="/shop">Go to shop page</Link>
     </div>
   );
 };

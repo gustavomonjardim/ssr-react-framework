@@ -2,12 +2,11 @@
   "name": "ssr-react",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server/index.js",
   "scripts": {
     "build:watch": "tsx ./scripts/watch.ts",
-    "dev": "concurrently \"pnpm build:watch\" \"node --watch dist/server.js\"",
+    "dev": "pnpm build && concurrently \"pnpm build:watch\" \"node --watch dist/server.js\"",
     "start": "node dist/server.js",
-    "build": "tsx ./scripts/build.ts"
+    "build": "rimraf dist && tsx ./scripts/build.ts"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +24,8 @@
     "@types/react-dom": "^18.2.7",
     "concurrently": "^8.2.2",
     "esbuild": "^0.18.17",
+    "rimraf": "^5.0.5",
+    "tsx": "^4.1.4",
     "typescript": "^5.1.6"
   }
 }
