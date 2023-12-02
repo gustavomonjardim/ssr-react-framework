@@ -1,8 +1,5 @@
-import React from "react";
 import express, { Application, Request, Response } from "express";
-import ReactDOMServer from "react-dom/server";
 import path from "path";
-import fs from "fs";
 import { getRouteData, handleGet, handlePost } from "./handlers";
 
 const app: Application = express();

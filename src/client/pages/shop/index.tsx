@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "../link";
+import { Link } from "../../link";
 
 const Shop = () => {
   return (
