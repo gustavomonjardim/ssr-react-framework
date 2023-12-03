@@ -42,26 +42,11 @@ const getRoutes = async () => {
   return arr;
 };
 
-getRoutes();
-
-const htmlString = (data: string) => `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
-<body>
-<div id="root">${data}</div>
-<script src="/bundle.js" ></script>
-</body>
-</html>`;
-
 export const getRouteData = async (
   req: Request,
   res: Response
 ): Promise<Module> => {
-  let importURL = path.join(__dirname, "../client/pages" + req.url);
+  let importURL = path.join(process.cwd(), "src/client/pages" + req.url);
 
   let isFile = fs.existsSync(importURL + ".tsx");
 
@@ -80,6 +65,14 @@ export const getRouteData = async (
   };
 };
 
+export const getRoot = async (): Promise<string> => {
+  let importURL = path.join(process.cwd(), "src/client/root.tsx");
+
+  const module = await import(importURL);
+
+  return ReactDOMServer.renderToString(React.createElement(module.default));
+};
+
 export const handleGet = async (req: Request, res: Response, data: Module) => {
   let props = {};
 
@@ -87,8 +80,8 @@ export const handleGet = async (req: Request, res: Response, data: Module) => {
     props = await data.loader(req, res);
   }
 
-  const routes = await getRoutes();
-
+  // const routes = await getRoutes();
+  //
   // const html = ReactDOMServer.renderToString(
   //   <StaticRouter location={req.url}>
   //     <Routes>
@@ -99,11 +92,19 @@ export const handleGet = async (req: Request, res: Response, data: Module) => {
   //   </StaticRouter>
   // );
 
-  const html = ReactDOMServer.renderToString(
+  const pageHtml = ReactDOMServer.renderToString(
     React.createElement(data?.component, props)
   );
+
+  const rootHtml = await getRoot();
+
+  const finalHtml = rootHtml.replace(
+    '<div id="root"></div>',
+    `<div id="root">${pageHtml}</div>`
+  );
+
   res.setHeader("Content-Type", "text/html");
-  res.send(htmlString(html));
+  res.send(finalHtml);
 };
 
 export const handlePost = async (req: Request, res: Response, data: Module) => {

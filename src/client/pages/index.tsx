@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "../link";
+import { Link } from "../components/link";
 
 export const loader = async () => {
   return { name: "Teste" };

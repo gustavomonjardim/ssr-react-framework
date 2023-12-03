@@ -7,5 +7,5 @@ type Props = {
 };
 
 export const Link = ({ to, children }: Props) => {
-  return <RRDLink to={to}>{children}</RRDLink>;
+  return <a href={to}>{children}</a>;
 };
