@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "../link";
 
 export const loader = async () => {
-  return { name: "Gustavo" };
+  return { name: "Teste" };
 };
 
 const Home = ({ name }: { name: string }) => {

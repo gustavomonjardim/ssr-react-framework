@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build:watch": "tsx ./scripts/watch.ts",
-    "dev": "pnpm build && concurrently \"pnpm build:watch\" \"node --watch dist/server.js\"",
+    "dev": "pnpm build && concurrently \"pnpm build:watch\" \"tsx watch src/server/index.ts\"",
     "start": "node dist/server.js",
     "build": "rimraf dist && tsx ./scripts/build.ts"
   },
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "glob": "^10.3.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.14.2",
